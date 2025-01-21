@@ -331,7 +331,7 @@ function calcData() {
       saveData.rate_area_id = id;
       saveData.base_charge_value = basePrice;
 
-      markupDataItems.forEach((item) => {
+     markupDataItems.forEach((item) => {
         let markupSave = {
           min_weight: "",
           max_weight: "",
@@ -340,11 +340,11 @@ function calcData() {
 
         let minWeight = item.querySelector(".markup-input-min").value;
         let maxnWeight = item.querySelector(".markup-input-max").value;
-        let markupPrice = item.querySelector(".markup-price").value;
+        let curPrice = item.querySelector(".cur-price").textContent;
 
         markupSave.min_weight = minWeight;
         markupSave.max_weight = maxnWeight;
-        markupSave.charge_value = markupPrice;
+        markupSave.charge_value = curPrice;
 
         saveData.extra_charges.push(markupSave);
       });
