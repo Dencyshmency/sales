@@ -1,3 +1,5 @@
+// Получение зон и их вывод
+
 let takeData = async () => {
   try {
     const response = await fetch("bd.json");
@@ -78,22 +80,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-// function addArrItem(id) {
-//   console.log(arrSaveData);
-// }
-
-// function removeArrItem(id) {
-//   let filtered = arrSaveData.filter((el) => el.rate_area_id !== id);
-
-//   arrSaveData.forEach((el) => {
-//     console.log(el.rate_area_id);
-//   });
-
-//   arrSaveData = filtered;
-
-//   console.log(arrSaveData);
-// }
-
 function addZone(parent) {
   parent.setAttribute("data-status", "active");
   let panel = `
@@ -112,10 +98,13 @@ function addZone(parent) {
   parent.insertAdjacentHTML("beforeend", panel);
 }
 
+// Удаление зоны
 function removeZone(parent) {
   parent.children[1].remove(0);
   parent.removeAttribute("data-status");
 }
+
+// Изменение состояния полей
 
 document.addEventListener("input", (event) => {
   let parent = event.target.closest(".price-data");
@@ -189,11 +178,14 @@ function addMarkup(parent) {
 
   parent.insertAdjacentHTML("beforeend", panel);
 }
+
 let markupSave = {
   min_weight: "",
   max_weight: "",
   charge_value: "",
 };
+
+// Изменение состояния полей
 
 document.addEventListener("input", (event) => {
   if (event.target.classList.contains("markup-input-min")) {
@@ -241,6 +233,8 @@ document.addEventListener("input", (event) => {
   }
 });
 
+// Удаление наценки
+
 document.addEventListener("click", (event) => {
   let item = event.target;
 
@@ -248,6 +242,8 @@ document.addEventListener("click", (event) => {
     item.closest(".markup-data").remove();
   }
 });
+
+// Сохранение данных и проверка(валидация)
 
 const saveBtn = document.querySelector(".save-btn");
 let group = [];
@@ -311,6 +307,8 @@ let saveData = {
   extra_charges: [],
 };
 
+// Функция сбора данных
+
 function calcData() {
   const searchItems = document.querySelectorAll(".search-item");
   fullData.length = 0;
@@ -331,7 +329,7 @@ function calcData() {
       saveData.rate_area_id = id;
       saveData.base_charge_value = basePrice;
 
-     markupDataItems.forEach((item) => {
+      markupDataItems.forEach((item) => {
         let markupSave = {
           min_weight: "",
           max_weight: "",
@@ -356,6 +354,8 @@ function calcData() {
     alert("Доставка не настроена");
   }
 }
+
+// Функция сборка и проверки данных
 
 function validateInputs() {
   group.length = 0;
@@ -387,6 +387,8 @@ function validateInputs() {
     }
   });
 }
+
+// Функции проверки накладывания масс
 
 function filterOverlappingRanges(arr) {
   return arr.filter((current) => {
@@ -434,6 +436,8 @@ function checkWieghtRadio() {
     });
   });
 }
+
+// Функия проверки на заполнение массива и объектов
 
 function hasNonEmptyValues(arr) {
   if (arr.length === 0) return false;
