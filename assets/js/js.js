@@ -1,6 +1,6 @@
 let takeData = async () => {
   try {
-    const response = await fetch("/bd.json");
+    const response = await fetch("../bd.json");
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
     }
